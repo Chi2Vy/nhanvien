@@ -249,6 +249,10 @@
         z-index: 999;
         position: relative;
       }
+      .col-code {
+        width: 120px;
+        min-width: 120px;
+      }
       /* Enhanced Column Widths */
       .col-position {
         width: 120px;
@@ -660,6 +664,11 @@
                   Tên Nhân Viên
                 </th>
                 <th
+                  class="sticky-header table-cell text-left text-xs font-bold text-gray-700 uppercase tracking-wider col-code"
+                >
+                  Mã Code
+                </th>
+                <th
                   class="sticky-header table-cell text-left text-xs font-bold text-gray-700 uppercase tracking-wider col-position"
                 >
                   Vị Trí
@@ -743,7 +752,8 @@
           stt: 1,
           id: "NV001",
           name: "Huỳnh Minh Nhựt",
-          avatar: "images/Nhut.jpg",
+          code: "",
+          avatar: "images/NV001.jpg",
           position: "Thư kí",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
@@ -761,7 +771,8 @@
           stt: 2,
           id: "NV002",
           name: "Nguyễn Thanh Vy",
-          avatar: "images/Vy.jpg",
+          code: "",
+          avatar: "images/NV002.jpg",
           position: "Thư kí",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
@@ -778,7 +789,8 @@
           stt: 3,
           id: "NV003",
           name: "Liên Trang Thi",
-          avatar: "images/Thi.jpg",
+          code: "",
+          avatar: "images/NV003.jpg",
           position: "Thư kí",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
@@ -795,7 +807,8 @@
           stt: 4,
           id: "NV004",
           name: "Hồ Cẩm Thùy",
-          avatar: "images/Thuy.jpg",
+          code: "",
+          avatar: "images/NV004.jpg",
           position: "Thư kí",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
@@ -812,8 +825,9 @@
           stt: 5,
           id: "NV005",
           name: "Nguyễn Anh Trúc",
+          code: "",
           avatar: "images/Truc.jpg",
-          position: "Chuyên viên kinh doanh",
+          position: "Sale",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
           startDate: "2025-05-12",
@@ -829,8 +843,9 @@
           stt: 6,
           id: "NV006",
           name: "Nguyễn Thị Quỳnh Nhã",
-          avatar: "images/Nha.jpg",
-          position: "Chuyên viên kinh doanh",
+          code: "",
+          avatar: "images/NV007.jpg",
+          position: "Sale",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
           startDate: "2025-04-28",
@@ -846,8 +861,9 @@
           stt: 7,
           id: "NV007",
           name: "Lê Thị Yến Nhi",
+          code: "",
           avatar: "images/Nhi.jpg",
-          position: "Chuyên viên kinh doanh",
+          position: "Sale",
           department: "PKD HUỲNH NO",
           level: "Nhân viên",
           startDate: "2025-05-19",
@@ -863,6 +879,7 @@
           stt: 8,
           id: "NV008",
           name: "Tô Thị Hồng Phương",
+          code: "",
           avatar: "images/Phuong.jpg",
           position: "Thư kí",
           department: "PKD HUỲNH NO",
@@ -1122,9 +1139,12 @@
                 <td class="sticky-col sticky-col-4 table-cell text-left text-sm font-semibold text-gray-900">
                     ${renderEditableCell(employee, "name")}
                 </td>
+                <td class="table-cell text-left text-sm text-gray-900 col-code">
+  ${renderEditableCell(employee, "code")}
+</td>
                 <td class="table-cell text-left text-sm text-gray-900 col-position">
                     ${renderSelectCell(employee, "position", [
-                      "Sale",
+                      "Chuyên viên kinh doanh",
                       "Thư ký",
                       "Trưởng phòng",
                       "Phó phòng",
@@ -1165,9 +1185,11 @@
                 <td class="table-cell text-left text-sm text-gray-900 col-address">
                     ${renderEditableCell(employee, "address")}
                 </td>
+
                 <td class="table-cell text-center text-sm col-actions">
                     ${renderActionsCell(employee)}
                 </td>
+                
             `;
         return row;
       }
@@ -1306,6 +1328,9 @@
                 <td class="sticky-col sticky-col-4 quick-add-sticky table-cell">
                     <input type="text" id="new-name" class="form-input" placeholder="Họ tên" />
                 </td>
+                <td class="table-cell col-code">
+  <input type="text" id="new-code" class="form-input" placeholder="Mã Code" />
+</td>
                 <td class="table-cell col-position">
                     <select id="new-position" class="form-input">
                         <option value="Sale">Sale</option>
@@ -1385,6 +1410,7 @@
           stt: employees.length + 1,
           id: document.getElementById("new-id").value.trim(),
           name: document.getElementById("new-name").value.trim(),
+          code: document.getElementById("new-code").value.trim(),
           avatar: avatarPreview ? avatarPreview.src : "/api/placeholder/50/50",
           position: document.getElementById("new-position").value,
           department: document.getElementById("new-department").value.trim(),
